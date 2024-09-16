@@ -6,7 +6,7 @@ class User(db.Model):
     name = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
-    role = db.Column(db.String(20), nullable=False)  # Admin, Member
+    role = db.Column(db.String(20), nullable=False)
     tasks = db.relationship('Task', backref='assigned_user', lazy=True)
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=True)
     team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=True)
@@ -20,7 +20,7 @@ class Task(db.Model):
     title = db.Column(db.String(120), nullable=False)
     description = db.Column(db.Text, nullable=True)
     priority = db.Column(db.String(10), nullable=False)
-    status = db.Column(db.String(20), nullable=False, default='Pending')
+    status = db.Column(db.String(20), nullable=False, default='backlog')
     deadline = db.Column(db.DateTime, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=True)
